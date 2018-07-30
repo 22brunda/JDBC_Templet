@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.qwinix.productcatalog.model.PackageBean;
 import com.qwinix.productcatalog.model.Subscription;
 import com.qwinix.productcatalog.service.SubscriptionService;
 

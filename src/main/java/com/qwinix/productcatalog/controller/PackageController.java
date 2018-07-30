@@ -34,7 +34,6 @@ public class PackageController  {
 	@PostMapping("/package")
 	public void createPackage(@RequestBody PackageBean apackage) {
 		packageService.createPackage(apackage);
-
 	}
 
 	@PutMapping("/package/{id}")

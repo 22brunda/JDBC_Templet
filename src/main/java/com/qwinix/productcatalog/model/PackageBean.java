@@ -12,7 +12,6 @@ public class PackageBean {
 	private int priority;
 	private Boolean enabled;
 	private List<Channel> channels = new ArrayList<>();
-
 	
 	public int getPackageId() {
 		return packageId;
@@ -56,5 +55,4 @@ public class PackageBean {
 	public void setChannels(List<Channel> channels) {
 		this.channels = channels;
 	}
-	
 }

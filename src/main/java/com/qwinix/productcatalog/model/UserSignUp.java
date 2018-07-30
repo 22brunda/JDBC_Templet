@@ -52,5 +52,4 @@ public class UserSignUp{
 	public void setDateOfBirth(String dateOfBirth) {
 		this.dateOfBirth = dateOfBirth;
 	}
-
 }

@@ -69,7 +69,6 @@ public class PackageRepo implements IPackageRepo{
 			List<Channel> channels = getChannelsForPackageId(p.getPackageId());
 			p.setChannels(channels);
 		}
-
 		return packages;
 	}
 
@@ -96,8 +95,9 @@ public class PackageRepo implements IPackageRepo{
 		packageCreate.setPackageId(id);
 
 		int rowsAffected = jdbcTemplate.update(SQL_INSERT_PACKAGE, packageCreate.getPackageId(), 
-				packageCreate.getName(), packageCreate.getDescription(), packageCreate.getPriority(), 
-				packageCreate.getAmount(), packageCreate.getEnabled());
+													packageCreate.getName(), packageCreate.getDescription(),
+													packageCreate.getPriority(), packageCreate.getAmount(), 
+													packageCreate.getEnabled());
 		if(rowsAffected == 0)
 			return false;
 

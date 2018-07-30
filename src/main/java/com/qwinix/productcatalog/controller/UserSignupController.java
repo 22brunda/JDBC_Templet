@@ -23,7 +23,7 @@ import com.qwinix.productcatalog.service.UserSignupService;
 public class UserSignupController {
 	@Autowired
 	UserSignupService userSignupService;
-	
+
 	@GetMapping("/users")
 	public List<UserSignUp> getAllUsers() {
 		return  userSignupService.getAllUser();
@@ -33,9 +33,9 @@ public class UserSignupController {
 	public UserSignUp getUserById(@PathVariable String email) {
 		return userSignupService.findByEmail(email);
 	}
-	
+
 	@PostMapping("/user")
-//	public  ResponseEntity <UserRetVal> createUser(@RequestBody UserSignup userDetails) {
+	//	public  ResponseEntity <UserRetVal> createUser(@RequestBody UserSignup userDetails) {
 	public  UserRetVal createUser(@RequestBody UserSignUp userDetails) {
 		ResponseEntity<UserRetVal> re = null;
 		UserRetVal retVal = new UserRetVal();
@@ -52,7 +52,7 @@ public class UserSignupController {
 		}		
 		return retVal;
 	}
-	
+
 	@DeleteMapping("/user/{id}")
 	public void deleteById(@PathVariable(value = "id") int deleteUserId) {
 		userSignupService.deleteById(deleteUserId);

@@ -15,6 +15,7 @@ import com.qwinix.productcatalog.model.ChannelMapper;
 
 @Component
 public class ChannelRepo implements IChannelRepo {
+	
 	@Autowired	
 	JdbcTemplate jdbcTemplate;
 
@@ -24,12 +25,12 @@ public class ChannelRepo implements IChannelRepo {
 	private final String SQL_GET_ALL = "select * from channel";
 	private final String SQL_INSERT_CHANNEL = "insert into channel(id, name, description, priority, title, active) values(?,?,?,?,?,?)";
 
-
 	@Autowired
 	public ChannelRepo(DataSource dataSource) {
 		jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
+	//Get Channel By ID
 	public Channel getChannelById(int id) {
 		try {
 			return jdbcTemplate.queryForObject(SQL_FIND_CHANNEL, new Object[] { id }, Channel.class);
@@ -40,19 +41,23 @@ public class ChannelRepo implements IChannelRepo {
 		}
 	} 
 
+	//Get All Channels
 	public List<Channel> getAllChannels() {
 		return jdbcTemplate.query(SQL_GET_ALL, new ChannelMapper());
 	}
 
+	//Delete Channel by ID
 	public boolean deleteChannel(int channelId) {
 		return jdbcTemplate.update(SQL_DELETE_CHANNEL, channelId) > 0;
 	}
 
+	//Update Channel
 	public  boolean updateChannel(Channel channel) {
-		return jdbcTemplate.update(SQL_UPDATE_CHANNEL, channel.getId(), channel.getName(), channel.getDescription(), channel.getPriority(), channel.getTitle(), channel.getActive()) > 0;
-
+		return jdbcTemplate.update(SQL_UPDATE_CHANNEL, channel.getId(), channel.getName(), channel.getDescription(),
+												channel.getPriority(), channel.getTitle(), channel.getActive()) > 0;
 	}
 
+	//Create Channel
 	public boolean createChannel(Channel channel) {
 		//Write code to select from seq_table.
 		Integer id = jdbcTemplate.queryForObject("select id from seq_table where entity=?", 
@@ -61,14 +66,12 @@ public class ChannelRepo implements IChannelRepo {
 		channel.setId(id);
 
 		int rowsAffected = jdbcTemplate.update(SQL_INSERT_CHANNEL, channel.getId(), 
-				channel.getName(), channel.getDescription(), channel.getPriority(), 
-				channel.getTitle(), channel.getActive());
+										channel.getName(), channel.getDescription(), channel.getPriority(), 
+										channel.getTitle(), channel.getActive());
 		if(rowsAffected == 0)
 			return false;
-
 		rowsAffected = jdbcTemplate.update("update seq_table set id=? where entity=?",
-				channel.getId(), "channel");	
+											channel.getId(), "channel");	
 		return true;
 	}
-
 }
